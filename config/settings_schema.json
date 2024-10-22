@@ -1,0 +1,10 @@
+[
+  {
+    "name": "Test Theme #1",
+    "theme_name": "Test-theme-1",
+    "theme_version": "0.1.0",
+    "theme_author": "Dylan McDonald",
+    "theme_documentation_url": "https://github.com/mcdonalddylan/shopify-test-theme-1",
+    "theme_support_url": "https://github.com/Shopify/themekit/issues"
+  }
+]
