@@ -51,18 +51,27 @@
     </div>
   </section>
 
-  <section class="cmp-site-banner cmp-site-banner--centered cmp-site-banner--max-width">
-    <div class="cmp-site-banner__title-container">
-      <div class="cmp-site-banner__title-column">
-        <h1 class="cmp-site-banner__title-text">{{ shop.name }}</h1>
+  {% if template == 'index' %}
+    <section class="cmp-site-banner cmp-site-banner--centered cmp-site-banner--max-width">
+      <div class="cmp-site-banner__title-container">
+        <div class="cmp-site-banner__title-column">
+          <h1 class="cmp-site-banner__title-text">{{ shop.name }}</h1>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+
+  <main role="main">
+    {{ content_for_layout }}
+  </main>
+</body>
+<footer>
+  <section class="cmp-footer__container cmp-footer__container--centered cmp-footer__container--max-width">
+    <div class="cmp-footer__links-row">
+      <div class="cmp-footer_links-column">
+        <a class="cmp-footer__link" href='/pages/contact'>Contact Us</a>
       </div>
     </div>
   </section>
-
-  <main role="main">
-    <section class="cmp-products-container cmp-products-container--max-width">
-      {{ content_for_layout }}
-    </section>
-  </main>
-</body>
+</footer>
 </html>

@@ -5,26 +5,37 @@
 }
 
 @keyframes spin-ani {
-   0% { transform: rotate(0deg); }
-   100% { transform: rotate(360deg); }
+   0% { transform-box: fill-box; transform-origin: center; transform: translate(-50%,-50%) rotate(0deg); }
+   100% { transform-box: fill-box; transform-origin: center; transform: translate(-50%,-50%) rotate(360deg); }
 }
 
 :root {
    --primary-font: "Go Regular";
 
    --desktop-tablet-max-width: 1270px;
-   --mobile-width: 568px;
 
    --primary-color: rgba(247,92,47,255);
    --secondary-color: rgba(251,150,110,255);
    --tertiary-color: rgba(148,122,109,255);
-   --white: rgba(255,240,230,255);
- }
+   --white-100: rgba(255,240,230,255);
+   --white-200: rgba(254,220,206,255);
+}
 
 body {
    font-family: var(--primary-font);
-   background-color: var(--white);
+   background-color: var(--white-100);
    -webkit-font-smoothing: antialiased;
+}
+
+main {
+   text-align: center;
+   margin: 60px auto 0;
+}
+
+footer {
+   margin: 30px 0 0;
+   background-color: var(--secondary-color);
+   height: 100%;
 }
 
 .cmp-nav-gradient {
@@ -39,7 +50,7 @@ body {
 
 .cmp-nav__spinner:hover,
 .cmp-nav__spinner:focus {
-   fill: var(--white);
+   fill: var(--white-100);
 }
 
 .cmp-nav {
@@ -59,7 +70,7 @@ body {
 body,
 .cmp-nav__container--centered,
 .cmp-site-banner--centered,
-main {
+.cmp-footer__container--centered {
    text-align: center;
    margin: auto;
 }
@@ -67,7 +78,8 @@ main {
 .cmp-nav__container--max-width,
 .cmp-site-banner--centered,
 .cmp-products-container--max-width,
-main {
+main,
+.cmp-footer__container--max-width {
    max-width: var(--desktop-tablet-max-width);
 }
 
@@ -86,41 +98,51 @@ main {
    display: inline-flex;
    flex-direction: column;
    position: relative;
-   color: var(--white);
+   color: var(--white-100);
    font-size: 1.1rem;
+   font-weight: 300;
    text-decoration: none;
    padding: 10px;
    text-align: center;
-   transition: all 0.3s ease;
-}
-
-.cmp-nav__spinner:before {
-   z-index: -1;
-   position: absolute;
-   top: -30px;
-   right: -10px;
-   content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpieD0iaHR0cHM6Ly9ib3h5LXN2Zy5jb20iPgogIDxwYXRoIGQ9Ik0gMzU1LjIgMTMyLjAxOCBMIDQwMy40OTIgMjAwLjU3MSBMIDQ3OS41OTEgMTY1LjM0OCBMIDQ4Ny4xMzcgMjQ4Ljg2MyBMIDU3MC42NTIgMjU2LjQwOSBMIDUzNS40MjkgMzMyLjUwOCBMIDYwMy45ODIgMzgwLjggTCA1MzUuNDI5IDQyOS4wOTIgTCA1NzAuNjUyIDUwNS4xOTEgTCA0ODcuMTM3IDUxMi43MzcgTCA0NzkuNTkxIDU5Ni4yNTIgTCA0MDMuNDkyIDU2MS4wMjkgTCAzNTUuMiA2MjkuNTgyIEwgMzA2LjkwOCA1NjEuMDI5IEwgMjMwLjgwOSA1OTYuMjUyIEwgMjIzLjI2MyA1MTIuNzM3IEwgMTM5Ljc0OCA1MDUuMTkxIEwgMTc0Ljk3MSA0MjkuMDkyIEwgMTA2LjQxOCAzODAuOCBMIDE3NC45NzEgMzMyLjUwOCBMIDEzOS43NDggMjU2LjQwOSBMIDIyMy4yNjMgMjQ4Ljg2MyBMIDIzMC44MDkgMTY1LjM0OCBMIDMwNi45MDggMjAwLjU3MSBaIiBzdHlsZT0iZmlsbDpyZ2IoMjQ3LCA5MiwgNDcpOyIgdHJhbnNmb3JtPSJtYXRyaXgoLTAuODY2MDMsIDAuNDk5OTkyLCAtMC40OTk5OTIsIC0wLjg2NjAzLCA3NDguNTE2OTg0LCA0MDIuMzYzODk3KSIgYng6c2hhcGU9InN0YXIgMzU1LjIgMzgwLjggMjQ4Ljc4MiAyNDguNzgyIDAuNzUgMTIgMUAwMjRiZDljMiIvPgo8L3N2Zz4=');
-   width: 90px;
-   height: 90px;
-   transform-box: fill-box;
-   transform-origin: center;
-   animation: spin-ani 6s infinite linear;
-   transition: all 0.3s ease;
-}
-
-.cmp-nav__spinner:before svg path {
-   fill: var(--primary-color) !important;
-}
-
-.cmp-nav__spinner:before svg:hover {
-   fill: var(--white) !important;
+   transition: all 0.2s ease;
 }
 
 .cmp-nav__container a:hover,
 .cmp-nav__container a:focus {
    color: var(--primary-color);
-   background-color: var(--white);
-   transition: all 0.3s ease;
+   background-color: var(--white-100);
+   fill: var(--white-100) !important;
+   transition: all 0.2s ease;
+}
+
+.cmp-nav__nav-link--selected {
+   color: var(--primary-color) !important;
+   background-color: var(--white-200);
+   fill: var(--white-200) !important;
+   font-weight: 700 !important;
+}
+
+.cmp-nav__spinner {
+   z-index: -1;
+   position: absolute;
+   top: 75%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   /* twelve-sided-star.svg with a --white-200 fill color */
+   content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpieD0iaHR0cHM6Ly9ib3h5LXN2Zy5jb20iPgogIDxwYXRoIGQ9Ik0gMzU1LjIgMTMyLjAxOCBMIDQwMy40OTIgMjAwLjU3MSBMIDQ3OS41OTEgMTY1LjM0OCBMIDQ4Ny4xMzcgMjQ4Ljg2MyBMIDU3MC42NTIgMjU2LjQwOSBMIDUzNS40MjkgMzMyLjUwOCBMIDYwMy45ODIgMzgwLjggTCA1MzUuNDI5IDQyOS4wOTIgTCA1NzAuNjUyIDUwNS4xOTEgTCA0ODcuMTM3IDUxMi43MzcgTCA0NzkuNTkxIDU5Ni4yNTIgTCA0MDMuNDkyIDU2MS4wMjkgTCAzNTUuMiA2MjkuNTgyIEwgMzA2LjkwOCA1NjEuMDI5IEwgMjMwLjgwOSA1OTYuMjUyIEwgMjIzLjI2MyA1MTIuNzM3IEwgMTM5Ljc0OCA1MDUuMTkxIEwgMTc0Ljk3MSA0MjkuMDkyIEwgMTA2LjQxOCAzODAuOCBMIDE3NC45NzEgMzMyLjUwOCBMIDEzOS43NDggMjU2LjQwOSBMIDIyMy4yNjMgMjQ4Ljg2MyBMIDIzMC44MDkgMTY1LjM0OCBMIDMwNi45MDggMjAwLjU3MSBaIiBzdHlsZT0iZmlsbDpyZ2IoMjU0LDIyMCwyMDYpOyIgdHJhbnNmb3JtPSJtYXRyaXgoLTAuODY2MDMsIDAuNDk5OTkyLCAtMC40OTk5OTIsIC0wLjg2NjAzLCA3NDguNTE2OTg0LCA0MDIuMzYzODk3KSIgYng6c2hhcGU9InN0YXIgMzU1LjIgMzgwLjggMjQ4Ljc4MiAyNDguNzgyIDAuNzUgMTIgMUAwMjRiZDljMiIvPgo8L3N2Zz4=');
+   width: 130%;
+   height: 130%;
+   transform-box: fill-box;
+   transform-origin: center;
+   animation: spin-ani 6s infinite linear;
+   transition: all 0.2s ease;
+}
+
+.cmp-nav__container a:hover .cmp-nav__spinner,
+.cmp-nav__container a:focus .cmp-nav__spinner {
+   animation-duration: 3s;
+   /* twelve-sided-star.svg with a --white-100 fill color */
+   content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpieD0iaHR0cHM6Ly9ib3h5LXN2Zy5jb20iPgogIDxwYXRoIGQ9Ik0gMzU1LjIgMTMyLjAxOCBMIDQwMy40OTIgMjAwLjU3MSBMIDQ3OS41OTEgMTY1LjM0OCBMIDQ4Ny4xMzcgMjQ4Ljg2MyBMIDU3MC42NTIgMjU2LjQwOSBMIDUzNS40MjkgMzMyLjUwOCBMIDYwMy45ODIgMzgwLjggTCA1MzUuNDI5IDQyOS4wOTIgTCA1NzAuNjUyIDUwNS4xOTEgTCA0ODcuMTM3IDUxMi43MzcgTCA0NzkuNTkxIDU5Ni4yNTIgTCA0MDMuNDkyIDU2MS4wMjkgTCAzNTUuMiA2MjkuNTgyIEwgMzA2LjkwOCA1NjEuMDI5IEwgMjMwLjgwOSA1OTYuMjUyIEwgMjIzLjI2MyA1MTIuNzM3IEwgMTM5Ljc0OCA1MDUuMTkxIEwgMTc0Ljk3MSA0MjkuMDkyIEwgMTA2LjQxOCAzODAuOCBMIDE3NC45NzEgMzMyLjUwOCBMIDEzOS43NDggMjU2LjQwOSBMIDIyMy4yNjMgMjQ4Ljg2MyBMIDIzMC44MDkgMTY1LjM0OCBMIDMwNi45MDggMjAwLjU3MSBaIiBzdHlsZT0iZmlsbDpyZ2IoMjU1LDI0MCwyMzApOyIgdHJhbnNmb3JtPSJtYXRyaXgoLTAuODY2MDMsIDAuNDk5OTkyLCAtMC40OTk5OTIsIC0wLjg2NjAzLCA3NDguNTE2OTg0LCA0MDIuMzYzODk3KSIgYng6c2hhcGU9InN0YXIgMzU1LjIgMzgwLjggMjQ4Ljc4MiAyNDguNzgyIDAuNzUgMTIgMUAwMjRiZDljMiIvPgo8L3N2Zz4=');
 }
 
 .cmp-site-banner__title-container {
@@ -138,7 +160,7 @@ main {
 }
 
 .cmp-site-banner__title-text {
-   color: var(--white);
+   color: var(--white-100);
    font-size: 2.5rem;
    font-weight: 300;
 }
@@ -149,11 +171,11 @@ main {
    justify-content: center;
    align-items: center;
    gap: 20px;
-   margin: 20px 10px 10px;
+   margin: 0 10px 10px;
 }
 
 .cmp-product {
-   flex: 0 1 38%;
+   flex: 0 1 24%;
    background-color: var(--secondary-color);
    box-shadow: 0 2px 5px var(--tertiary-color);
    border-radius: 10px;
@@ -164,8 +186,23 @@ main {
 
 .cmp-product:hover,
 .cmp-product:focus {
-   transform: scale(1.01);
+   flex: 0 1 25%;
    transition: all 0.3s ease;
+}
+
+.cmp-product__row {
+   display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+.cmp-product__row--margin-top-10 {
+   margin-top: 10px;
+}
+
+.cmp-product__column {
+   display: flex;
+   flex-direction: column;
 }
 
 .cmp-product h4 {
@@ -177,7 +214,7 @@ main {
 
 .cmp-product h4,
 .cmp-product p {
-   color: var(--white);
+   color: var(--white-100);
 }
 
 .cmp-product img {
@@ -185,9 +222,45 @@ main {
    border-radius: 10px;
 }
 
-@media only screen and (max-width: var(--mobile-width)) {
+.cmp-footer__container {
+   padding: 40px 5px 80px;
+}
+
+.cmp-footer__links-row {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 10px;
+}
+
+.cmp-footer__links-column {
+   display: flex;
+   flex-direction: column;
+}
+
+.cmp-footer__link {
+   font-size: 1.1rem;
+   color: var(--white-100);
+}
+
+/* Mobile Styling */
+@media only screen and (max-width: 568px) {
    .cmp-nav__container a {
       font-size: 0.8rem;
       font-weight: 400;
+   }
+
+   .cmp-nav__spinner:before {
+      width: 50px;
+      height: 50px;
+   }
+
+   .cmp-product {
+      flex: 0 1 75%;
+   }
+
+   .cmp-product:hover,
+   .cmp-product:focus {
+      flex: 0 1 76%;
    }
 }

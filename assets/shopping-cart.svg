@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 30px;" x1="49.607" y1="89.864" x2="449.473" y2="200"/>
+  <circle style="" cx="33.834" cy="84.576" r="28.5"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 30px;" x1="117.926" y1="109.377" x2="117.926" y2="400"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-width: 30px;" x1="449.473" y1="200" x2="449.473" y2="400"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 30px;" x1="118.595" y1="301.008" x2="444.98" y2="301.008"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 30px;" x1="193" y1="132.21" x2="193" y2="300"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 30px;" x1="383" y1="184.305" x2="383" y2="300"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-linecap: round; stroke-width: 30px;" x1="287" y1="156.173" x2="287" y2="300"/>
+  <circle style="" cx="117.605" cy="409.355" r="33.49"/>
+  <circle style="" cx="449.473" cy="409.355" r="32.99"/>
+</svg>

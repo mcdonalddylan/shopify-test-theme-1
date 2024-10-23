@@ -1,8 +1,16 @@
-{% for product in collections.frontpage.products limit:4 %}
-  <a class="cmp-product" href="{{ product.url | within: collection }}">
-    <h4>{{ product.title }}</h4>
-    <p>{{ product.price | money }}</p>
-    {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-    <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-  </a>
-{% endfor %}
+<section class="cmp-products-container cmp-products-container--max-width">
+  {% for product in collections.frontpage.products limit:6 %}
+    <a class="cmp-product" href="{{ product.url | within: collection }}">
+      {% unless product.available %}<p><strong>sold out</strong></p>{% endunless %}
+      <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+      <div class="cmp-product__row cmp-product__row--margin-top-10">
+        <div class="cmp-product__column">
+          <h4>{% assign truncated_title = product.title | slice: 0, 20 %} {% if product.title.size > 20 %} {{ truncated_title | append: '...' | escape }} {% else %} {{ product.title | escape }} {% endif %}</h4>
+        </div>
+        <div class="cmp-product__column">
+          <p>{{ product.price | money }}</p>
+        </div>
+      </div>
+    </a>
+  {% endfor %}
+</section>
