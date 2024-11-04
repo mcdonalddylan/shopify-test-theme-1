@@ -1,18 +1,25 @@
-{% paginate collection.products by 2 %}
-  <h1>{{ collection.title }}</h1>
-  {% for product in collection.products %}
-    <div>
-      <a href="{{ product.url | within: collection }}">{{ product.title }}</a>
-      {{ product.price | money }}
-      {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
-      <a href="{{ product.url | within: collection }}">
-        <img src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
-      </a>
+<section class="cmp-catalog">
+  {% paginate collection.products by 4 %}
+    <div class="cmp-catalog__page-banner">
+      <h1 class="cmp-catalog__page-title">{{ collection.title }}</h1>
     </div>
-  {% else %}
-    <p>no matches</p>
-  {% endfor %}
-  {% if paginate.pages > 1 %}
-    {{ paginate | default_pagination }}
-  {% endif %}
-{% endpaginate %}
+    <div class="cmp-catalog__collections-container">
+      {% for product in collection.products %}
+        <a class="cmp-catalog__item" href="{{ product.url | within: collection }}">
+          <p class="cmp-catalog__item-title" >{{ product.title }}</p>
+          <p class="cmp-catalog__item-price" >{{ product.price | money }}</p>
+          {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
+          <img class="cmp-catalog__item-img" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">
+        </a>
+      {% else %}
+        <p>No matches :(</p>
+      {% endfor %}
+    </div>
+    <hr class="cmp-catalog__pagintaion-hr">
+    <div class="cmp-catalog__pagintaion">
+      {% if paginate.pages > 1 %}
+        {{ paginate | default_pagination }}
+      {% endif %}
+    </div>
+  {% endpaginate %}
+</section>

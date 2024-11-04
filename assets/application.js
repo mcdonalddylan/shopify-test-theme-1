@@ -1,5 +1,10 @@
 ;(() => {
     document.addEventListener("DOMContentLoaded", () => {
+
+        // ++++++++++++++++
+        // Nav Spinner Re-locating
+        // ++++++++++++++++
+
         const location = window.location.pathname;
         const navigationLinksList = document.querySelectorAll('.cmp-nav__container a');
     
@@ -27,5 +32,28 @@
         } else if (navigationLinksList.length > 0 && location === '/account') {
             addSpinnerToNavElement(navigationLinksList[4], spinningImg);
         }
+
+        // ++++++++++++++++
+        // Account Dropdown Logic
+        // ++++++++++++++++
+
+        const accountButton = document.querySelector('.cmp-nav__account-btn');
+        const accountDropdown = document.querySelector('.cmp-account-dropdown');
+
+        /**
+         * Toggle Show Dropdown
+         * @param {*} event 
+         */
+        const toggleShowDropdown = (event) => {
+            event.preventDefault();
+            if (accountDropdown.classList.contains('cmp-account-dropdown--hide')) {
+                accountDropdown.classList.remove('cmp-account-dropdown--hide');
+            } else {
+                accountDropdown.classList.add('cmp-account-dropdown--hide');
+            }
+        }
+
+        accountButton.addEventListener('click', toggleShowDropdown);
+        accountButton.addEventListener('blur', toggleShowDropdown);
     });
 })();

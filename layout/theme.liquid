@@ -9,6 +9,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
   {{ content_for_header }} <!-- Header hook for plugins -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
+  {{ 'cart.css' | asset_url | stylesheet_tag }}
+  {{ 'catalog.css' | asset_url | stylesheet_tag }}
+  {{ 'contact.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
@@ -34,16 +37,30 @@
 
       <div class="cmp-nav__account-nav-container">
         <div class="cmp-nav__account-nav">
-          <a href="/cart">Cart</a>
+          <a class="cmp-nav__cart-link" href="/cart">
+            <span class="cmp-nav__cart-link-text">Cart</span>
+            <span class="cmp-nav__cart-mobile-icon"></span>
+          </a>
 
           {% if shop.customer_accounts_enabled %}
-            {% if customer %}
-              <a href="/account">account</a>
-              {{ 'log out'  | customer_logout_link }}
-            {% else %}
-              {{ 'log in ' | customer_login_link }}
-              {{ 'register' | customer_register_link }}
-            {% endif %}
+            <button class="cmp-nav__account-btn">Account</button>
+            <section class="cmp-account-dropdown cmp-account-dropdown--hide">
+              <ul class="cmp-account-dropdown__container">
+                {% if customer %}
+                  <li>
+                    {{ 'Log Out'  | customer_logout_link }}
+                  </li>
+                {% else %}
+                  <li>
+                    {{ 'Log In ' | customer_login_link }}
+                  </li>
+                  <li>
+                    {{ 'Register' | customer_register_link }}
+                  </li>
+                {% endif %}
+              </ul>
+            </section>
+              
           {% endif %}
         </div>
       </div>

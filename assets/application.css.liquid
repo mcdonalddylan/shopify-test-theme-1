@@ -17,8 +17,14 @@
    --primary-color: rgba(247,92,47,255);
    --secondary-color: rgba(251,150,110,255);
    --tertiary-color: rgba(148,122,109,255);
+   --tertiary-color-transparent: rgba(148,122,109,60);
+   --accent-color-100: rgba(242,255,255,255);
+   --accent-color-200: rgba(120,194,196,255);
+   --accent-color-300: rgba(47,77,77,255);
+   --accent-color-400: rgba(16,26,26,255);
    --white-100: rgba(255,240,230,255);
    --white-200: rgba(254,220,206,255);
+   --red-200: rgba(181,73,91,255);
 }
 
 body {
@@ -29,12 +35,12 @@ body {
 
 main {
    text-align: center;
-   margin: 60px auto 0;
+   margin: 40px auto 0;
 }
 
 footer {
    margin: 30px 0 0;
-   background-color: var(--secondary-color);
+   background-color: var(--accent-color-200);
    height: 100%;
 }
 
@@ -45,7 +51,7 @@ footer {
    right: 0;
    width: 100%;
    height: 20px;
-   background: linear-gradient(180deg, var(--tertiary-color), rgba(0,0,0,0));
+   background: linear-gradient(180deg, var(--accent-color-400), rgba(0,0,0,0));
 }
 
 .cmp-nav__spinner:hover,
@@ -85,6 +91,7 @@ main,
 
 .cmp-nav__site-nav-container,
 .cmp-nav__account-nav-container {
+   position: relative;
    display: flex;
    flex-direction: column;
 }
@@ -94,7 +101,8 @@ main,
    display: flex;
 }
 
-.cmp-nav__container a {
+.cmp-nav__container a,
+.cmp-nav__container button {
    display: inline-flex;
    flex-direction: column;
    position: relative;
@@ -104,20 +112,24 @@ main,
    text-decoration: none;
    padding: 10px;
    text-align: center;
+   background: none;
+   border: 0;
    transition: all 0.2s ease;
 }
 
 .cmp-nav__container a:hover,
-.cmp-nav__container a:focus {
+.cmp-nav__container a:focus,
+.cmp-nav__container button:hover,
+.cmp-nav__container button:focus {
    color: var(--primary-color);
-   background-color: var(--white-100);
+   background-color: var(--white-100) !important;
    fill: var(--white-100) !important;
    transition: all 0.2s ease;
 }
 
 .cmp-nav__nav-link--selected {
    color: var(--primary-color) !important;
-   background-color: var(--white-200);
+   background-color: var(--white-200) !important;
    fill: var(--white-200) !important;
    font-weight: 700 !important;
 }
@@ -145,13 +157,40 @@ main,
    content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczpieD0iaHR0cHM6Ly9ib3h5LXN2Zy5jb20iPgogIDxwYXRoIGQ9Ik0gMzU1LjIgMTMyLjAxOCBMIDQwMy40OTIgMjAwLjU3MSBMIDQ3OS41OTEgMTY1LjM0OCBMIDQ4Ny4xMzcgMjQ4Ljg2MyBMIDU3MC42NTIgMjU2LjQwOSBMIDUzNS40MjkgMzMyLjUwOCBMIDYwMy45ODIgMzgwLjggTCA1MzUuNDI5IDQyOS4wOTIgTCA1NzAuNjUyIDUwNS4xOTEgTCA0ODcuMTM3IDUxMi43MzcgTCA0NzkuNTkxIDU5Ni4yNTIgTCA0MDMuNDkyIDU2MS4wMjkgTCAzNTUuMiA2MjkuNTgyIEwgMzA2LjkwOCA1NjEuMDI5IEwgMjMwLjgwOSA1OTYuMjUyIEwgMjIzLjI2MyA1MTIuNzM3IEwgMTM5Ljc0OCA1MDUuMTkxIEwgMTc0Ljk3MSA0MjkuMDkyIEwgMTA2LjQxOCAzODAuOCBMIDE3NC45NzEgMzMyLjUwOCBMIDEzOS43NDggMjU2LjQwOSBMIDIyMy4yNjMgMjQ4Ljg2MyBMIDIzMC44MDkgMTY1LjM0OCBMIDMwNi45MDggMjAwLjU3MSBaIiBzdHlsZT0iZmlsbDpyZ2IoMjU1LDI0MCwyMzApOyIgdHJhbnNmb3JtPSJtYXRyaXgoLTAuODY2MDMsIDAuNDk5OTkyLCAtMC40OTk5OTIsIC0wLjg2NjAzLCA3NDguNTE2OTg0LCA0MDIuMzYzODk3KSIgYng6c2hhcGU9InN0YXIgMzU1LjIgMzgwLjggMjQ4Ljc4MiAyNDguNzgyIDAuNzUgMTIgMUAwMjRiZDljMiIvPgo8L3N2Zz4=');
 }
 
+
+.cmp-nav__cart-mobile-icon {
+   display: none;
+}
+
+.cmp-account-dropdown {
+   position: absolute;
+   top: 40px;
+   right: 0;
+   background: var(--primary-color);
+   border-top: 1px solid var(--white-100);
+}
+
+.cmp-account-dropdown__container {
+   margin: 0;
+   padding: 0;
+   width: 100%;
+}
+
+.cmp-account-dropdown__container li {
+   list-style-type: none;
+}
+
+.cmp-account-dropdown--hide {
+   display: none;
+}
+
 .cmp-site-banner__title-container {
    display: flex;
    width: 100%;
    height: 225px;
    justify-content: center;
    align-items: center;
-   background: linear-gradient(65deg, var(--secondary-color), var(--tertiary-color));
+   background: linear-gradient(65deg, var(--accent-color-200), var(--accent-color-300));
 }
 
 .cmp-site-banner__title-column {
@@ -245,7 +284,8 @@ main,
 
 /* Mobile Styling */
 @media only screen and (max-width: 568px) {
-   .cmp-nav__container a {
+   .cmp-nav__container a,
+   .cmp-nav__container button {
       font-size: 0.8rem;
       font-weight: 400;
    }
@@ -253,6 +293,29 @@ main,
    .cmp-nav__spinner:before {
       width: 50px;
       height: 50px;
+   }
+
+   .cmp-nav__cart-link-text {
+      display: none;
+   }
+
+   .cmp-nav__cart-mobile-icon {
+      display: block;
+      /* shopping-cart.svg with a --white-100 fill color */
+      background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjU1LDI0MCwyMzApOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSI0OS42MDciIHkxPSI4OS44NjQiIHgyPSI0NDkuNDczIiB5Mj0iMjAwIi8+CiAgPGNpcmNsZSBzdHlsZT0iZmlsbDogcmdiKDI1NSwyNDAsMjMwKTsiIGN4PSIzMy44MzQiIGN5PSI4NC41NzYiIHI9IjI4LjUiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjU1LDI0MCwyMzApOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIxMTcuOTI2IiB5MT0iMTA5LjM3NyIgeDI9IjExNy45MjYiIHkyPSI0MDAiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjU1LDI0MCwyMzApOyBzdHJva2Utd2lkdGg6IDMwcHg7IiB4MT0iNDQ5LjQ3MyIgeTE9IjIwMCIgeDI9IjQ0OS40NzMiIHkyPSI0MDAiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjU1LDI0MCwyMzApOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIxMTguNTk1IiB5MT0iMzAxLjAwOCIgeDI9IjQ0NC45OCIgeTI9IjMwMS4wMDgiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjU1LDI0MCwyMzApOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIxOTMiIHkxPSIxMzIuMjEiIHgyPSIxOTMiIHkyPSIzMDAiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjU1LDI0MCwyMzApOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIzODMiIHkxPSIxODQuMzA1IiB4Mj0iMzgzIiB5Mj0iMzAwIi8+CiAgPGxpbmUgc3R5bGU9InN0cm9rZTogcmdiKDI1NSwyNDAsMjMwKTsgc3Ryb2tlLWxpbmVjYXA6IHJvdW5kOyBzdHJva2Utd2lkdGg6IDMwcHg7IiB4MT0iMjg3IiB5MT0iMTU2LjE3MyIgeDI9IjI4NyIgeTI9IjMwMCIvPgogIDxjaXJjbGUgc3R5bGU9ImZpbGw6IHJnYigyNTUsMjQwLDIzMCk7IiBjeD0iMTE3LjYwNSIgY3k9IjQwOS4zNTUiIHI9IjMzLjQ5Ii8+CiAgPGNpcmNsZSBzdHlsZT0iZmlsbDogcmdiKDI1NSwyNDAsMjMwKTsiIGN4PSI0NDkuNDczIiBjeT0iNDA5LjM1NSIgcj0iMzIuOTkiLz4KPC9zdmc+');
+      width: 1.1rem;
+      height: 1.1rem;
+   }
+
+   .cmp-nav__cart-link:hover .cmp-nav__cart-mobile-icon,
+   .cmp-nav__cart-link:focus .cmp-nav__cart-mobile-icon,
+   .cmp-nav__cart-link.cmp-nav__nav-link--selected .cmp-nav__cart-mobile-icon {
+      /* shopping-cart.svg with a --primary-color fill color */
+      background: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB2aWV3Qm94PSIwIDAgNTAwIDUwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjQ3LDkyLDQ3KTsgc3Ryb2tlLWxpbmVjYXA6IHJvdW5kOyBzdHJva2Utd2lkdGg6IDMwcHg7IiB4MT0iNDkuNjA3IiB5MT0iODkuODY0IiB4Mj0iNDQ5LjQ3MyIgeTI9IjIwMCIvPgogIDxjaXJjbGUgc3R5bGU9ImZpbGw6IHJnYigyNDcsOTIsNDcpOyIgY3g9IjMzLjgzNCIgY3k9Ijg0LjU3NiIgcj0iMjguNSIvPgogIDxsaW5lIHN0eWxlPSJzdHJva2U6IHJnYigyNDcsOTIsNDcpOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIxMTcuOTI2IiB5MT0iMTA5LjM3NyIgeDI9IjExNy45MjYiIHkyPSI0MDAiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjQ3LDkyLDQ3KTsgc3Ryb2tlLXdpZHRoOiAzMHB4OyIgeDE9IjQ0OS40NzMiIHkxPSIyMDAiIHgyPSI0NDkuNDczIiB5Mj0iNDAwIi8+CiAgPGxpbmUgc3R5bGU9InN0cm9rZTogcmdiKDI0Nyw5Miw0Nyk7IHN0cm9rZS1saW5lY2FwOiByb3VuZDsgc3Ryb2tlLXdpZHRoOiAzMHB4OyIgeDE9IjExOC41OTUiIHkxPSIzMDEuMDA4IiB4Mj0iNDQ0Ljk4IiB5Mj0iMzAxLjAwOCIvPgogIDxsaW5lIHN0eWxlPSJzdHJva2U6IHJnYigyNDcsOTIsNDcpOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIxOTMiIHkxPSIxMzIuMjEiIHgyPSIxOTMiIHkyPSIzMDAiLz4KICA8bGluZSBzdHlsZT0ic3Ryb2tlOiByZ2IoMjQ3LDkyLDQ3KTsgc3Ryb2tlLWxpbmVjYXA6IHJvdW5kOyBzdHJva2Utd2lkdGg6IDMwcHg7IiB4MT0iMzgzIiB5MT0iMTg0LjMwNSIgeDI9IjM4MyIgeTI9IjMwMCIvPgogIDxsaW5lIHN0eWxlPSJzdHJva2U6IHJnYigyNDcsOTIsNDcpOyBzdHJva2UtbGluZWNhcDogcm91bmQ7IHN0cm9rZS13aWR0aDogMzBweDsiIHgxPSIyODciIHkxPSIxNTYuMTczIiB4Mj0iMjg3IiB5Mj0iMzAwIi8+CiAgPGNpcmNsZSBzdHlsZT0iZmlsbDogcmdiKDI0Nyw5Miw0Nyk7IiBjeD0iMTE3LjYwNSIgY3k9IjQwOS4zNTUiIHI9IjMzLjQ5Ii8+CiAgPGNpcmNsZSBzdHlsZT0iZmlsbDogcmdiKDI0Nyw5Miw0Nyk7IiBjeD0iNDQ5LjQ3MyIgY3k9IjQwOS4zNTUiIHI9IjMyLjk5Ii8+Cjwvc3ZnPg==') !important;
+   }
+
+   .cmp-account-dropdown {
+      top: 37px;
    }
 
    .cmp-product {

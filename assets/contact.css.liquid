@@ -1,0 +1,94 @@
+.cmp-contact__page-banner {
+    max-width: var(--desktop-tablet-max-width);
+    margin: 0 auto 15px;
+    padding: 20px 50px;
+    background: linear-gradient(170deg, var(--accent-color-200), var(--accent-color-300));
+}
+
+.cmp-contact__page-title {
+    text-align: left;
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--white-100);
+}
+
+.cmp-contact__success-text {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--accent-color-300);
+}
+
+.cmp-contact__success-text {
+    font-size: 2rem;
+    font-weight: 300;
+    color: var(--accent-color-300);
+    text-align: center;
+}
+
+.cmp-contact__errors-container ul {
+    margin: 10px;
+    padding: 20px;
+    text-align: center;
+    list-style-type: none;
+    background-color: var(--red-200);
+    border-radius: 30px;
+}
+
+.cmp-contact__errors-container li {
+    font-weight: 800;
+    color: var(--white-100);
+}
+
+.cmp-contact__form-field-row,
+.cmp-contact__form-button-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cmp-contact__form-field-row {
+    width: 100%;
+}
+
+.cmp-contact__form-field-column,
+.cmp-contact__form-button-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.cmp-contact__form-field-label,
+.cmp-contact__form-field-input,
+.cmp-contact__form-field-textarea {
+    font-size: 1.1rem;
+}
+
+.cmp-contact__form-field-label {
+    color: var(--accent-color-300);
+}
+
+.cmp-contact__form-field-input,
+.cmp-contact__form-field-textarea {
+    color: var(--teriary-color);
+    background: linear-gradient(180deg, var(--primary-color), var(--secondary-color), var(--secondary-color), var(--secondary-color));
+}
+
+.cmp-contact__form-field-input,
+.cmp-contact__form-field-textarea,
+.cmp-contact__form-field-btn {
+    margin: 10px;
+    padding: 20px;
+    border: 0;
+    border-radius: 15px;
+}
+
+.cmp-contact__form-field-btn {
+    color: var(--white-100);
+    background-color: var(--accent-color-200);
+}
+
+/* Mobile Styling */
+@media only screen and (max-width: 568px) {
+    .cmp-contact__page-banner {
+        padding: 15px 25px;
+    }
+}
