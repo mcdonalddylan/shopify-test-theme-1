@@ -12,6 +12,7 @@
   {{ 'cart.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.css' | asset_url | stylesheet_tag }}
   {{ 'contact.css' | asset_url | stylesheet_tag }}
+  {{ 'products.css' | asset_url | stylesheet_tag }}
   {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
@@ -40,6 +41,9 @@
           <a class="cmp-nav__cart-link" href="/cart">
             <span class="cmp-nav__cart-link-text">Cart</span>
             <span class="cmp-nav__cart-mobile-icon"></span>
+            {% if cart.item_count > 0 %}
+            <div class="cmp-nav__cart-items-text">{{ cart.item_count }}</div>
+            {% endif %}
           </a>
 
           {% if shop.customer_accounts_enabled %}
@@ -85,7 +89,13 @@
 <footer>
   <section class="cmp-footer__container cmp-footer__container--centered cmp-footer__container--max-width">
     <div class="cmp-footer__links-row">
-      <div class="cmp-footer_links-column">
+      <div class="cmp-footer__links-column">
+        <a class="cmp-footer__link" href='/'>Home</a>
+      </div>
+      <div class="cmp-footer__links-column">
+        <a class="cmp-footer__link" href='/collections/all'>Catalog</a>
+      </div>
+      <div class="cmp-footer__links-column">
         <a class="cmp-footer__link" href='/pages/contact'>Contact Us</a>
       </div>
     </div>

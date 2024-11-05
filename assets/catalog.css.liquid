@@ -5,8 +5,8 @@
 
 .cmp-catalog__page-banner {
     max-width: var(--desktop-tablet-max-width);
-    margin: 0 auto 15px;
-    padding: 20px 50px;
+    margin: 0 auto 20px;
+    padding: 10px 20px;
     background: linear-gradient(170deg, var(--accent-color-200), var(--accent-color-300));
 }
 
@@ -55,6 +55,8 @@
 .cmp-catalog__item-img {
     width: 100%;
     border-radius: 10px;
+    object-fit: cover;
+    min-height: 150px;
 }
 
 .cmp-catalog__pagintaion-hr {
@@ -82,6 +84,25 @@
 /* Mobile Styling */
 @media only screen and (max-width: 568px) {
     .cmp-catalog__page-banner {
-        padding: 15px 25px;
+        padding: 5px 25px;
+    }
+
+    .cmp-catalog__item {
+        flex: 0 1 37%;
+        padding: 15px;
+    }
+
+    .cmp-catalog__item:hover,
+    .cmp-catalog__item:focus {
+        flex: 0 1 38%;
+    }
+
+    .cmp-catalog__item-title {
+        font-size: 1.1rem;
+        font-weight: 500;
+    }
+
+    .cmp-catalog__item-price {
+        font-size: 1rem;
     }
 }

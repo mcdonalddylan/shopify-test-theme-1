@@ -3,44 +3,67 @@
     <h1 class="cmp-cart__page-title">Cart</h1>
   </div>
   {% if cart.item_count > 0 %}
-    <form action="/cart" method="post" novalidate>
-      <table>
-        <thead>
-          <th colspan="2">Prod</th>
-          <th>Price</th>
-          <th>Qty</th>
-          <th>total</th>
-        </thead>
-        <tbody>
-          {% for item in cart.items %}
-            <tr>
-              <td>
+    <form class="cmp-cart__cart-form" action="/cart" method="post" novalidate>
+      <div class="cmp-cart__cart-container">
+        <div class="cmp-cart__cart-container-header">
+          <div class="cmp-cart__cart-header-column cmp-cart__cart-header-column--1">
+            <p class="cmp-cart__cart-header-text">Image</p>
+          </div>
+          <div class="cmp-cart__cart-header-column cmp-cart__cart-header-column--2">
+            <p class="cmp-cart__cart-header-text">Name</p>
+          </div>
+          <div class="cmp-cart__cart-header-column cmp-cart__cart-header-column--3">
+            <p class="cmp-cart__cart-header-text">Price</p>
+          </div>
+          <div class="cmp-cart__cart-header-column cmp-cart__cart-header-column--4">
+            <p class="cmp-cart__cart-header-text">Qty</p>
+          </div>
+          <div class="cmp-cart__cart-header-column cmp-cart__cart-header-column--5">
+            <p class="cmp-cart__cart-header-text">Total</p>
+          </div>
+          <div class="cmp-cart__cart-header-column cmp-cart__cart-header-column--6">
+            <span></span>
+          </div>
+        </div>
+        <hr class="cmp-cart__header-hr">
+        {% for item in cart.items %}
+          <div class="cmp-cart__cart-container-body">
+            <div class="cmp-cart__cart-container-body-info">
+              <div class="cmp-cart__cart-body-column cmp-cart__cart-body-column--1">
                 <a href="{{ item.url | within: collections.all }}">
-                  <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+                  <img class="cmp-cart__cart-img" src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
                 </a>
-              </td>
-              <td>
-                <a href="{{ item.url }}">{{ item.product.title }}</a>
-                {{ item.variant.title }}
-                <a href="/cart/change?line={{ forloop.index }}&amp;quantity=0">remove</a>
-              </td>
-              <td>{{ item.price | money }}</td>
-              <td>
-                <input type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
-              </td>
-              <td>
-                {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
-                {{ item.line_price | money }}
-                {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
-              </td>
-            </tr>
-          {% endfor %}
-        </tbody>
-      </table>
+              </div>
+              <div class="cmp-cart__cart-body-column cmp-cart__cart-body-column--2">
+                <a class="cmp-cart__cart-product-title" href="{{ item.url }}">{{ item.product.title }} - {{ item.variant.title }}</a>
+              </div>
+              <div class="cmp-cart__cart-body-column cmp-cart__cart-body-column--3">
+                <p class="cmp-cart__cart-product-price">{{ item.price | money }}</p>
+              </div>
+              <div class="cmp-cart__cart-body-column cmp-cart__cart-body-column--4">
+                <input class="cmp-cart__cart-product-quantity-input" type="number" name="updates[]" id="updates_{{ item.key }}" value="{{ item.quantity }}" min="0">
+              </div>
+              <div class="cmp-cart__cart-body-column cmp-cart__cart-body-column--5">
+                <p class="cmp-cart__cart-product-total-price">
+                  {% if item.original_line_price != item.line_price %}{{ item.original_line_price | money }}{% endif %}
+                  {{ item.line_price | money }}
+                  {% for discount in item.discounts %}{{ discount.title }}{% endfor %}
+                </p>
+              </div>
+            </div>
+            <div class="cmp-cart__cart-body-column cmp-cart__cart-body-column--6">
+              <a class="cmp-cart__cart-product-remove-btn" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
+                <span class="cmp-cart__cart-product-remove-btn-text">Remove</span>
+                <span class="cmp-cart__cart-product-remove-btn-icon"></span>
+              </a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
       <div>
-        <p>sub total : {{ cart.total_price | money }}</p>
-        <button type="submit" name="update">Update</button>
-        <button type="submit" name="checkout">Checkout</button>
+        <p class="cmp-cart__cart-total-price">Sub total : {{ cart.total_price | money }}</p>
+        <button class="cmp-cart__cart-update-btn" type="submit" name="update">Update</button>
+        <button class="cmp-cart__cart-checkout-btn" type="submit" name="checkout">Checkout</button>
       </div>
     </form>
   {% else %}

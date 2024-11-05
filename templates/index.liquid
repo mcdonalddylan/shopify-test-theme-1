@@ -1,4 +1,4 @@
-<section class="cmp-products-container cmp-products-container--max-width">
+<section class="cmp-product-container cmp-product-container--max-width">
   {% for product in collections.frontpage.products limit:6 %}
     <a class="cmp-product" href="{{ product.url | within: collection }}">
       {% unless product.available %}<p><strong>sold out</strong></p>{% endunless %}
