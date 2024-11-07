@@ -1,22 +1,88 @@
-{% paginate search.results by 10 %}
-  <form action="/search" method="get" role="search">
-    <input type="search" name="q" value="{{ search.terms | escape }}">
-    <button type="submit">search</button>
-  </form>
+<script>
+  // ++++++++++++++++
+  // Highlighting Search Keywords
+  // ++++++++++++++++
 
-  {% if search.performed %}
-    {% for item in search.results %}
-      {% if item.featured_image %}
-        <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
-          {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
-        </a>
-      {% endif %}
-      <h5>{{ item.title | link_to: item.url }}</h5>
-      <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
-    {% else %}
-      no results
-    {% endfor %}
-  {% endif %}
+  const highlightKeywords = (text, keyword) => {
+      var pattern = new RegExp('(' + keyword + ')', 'gi');
+      return text.replace(pattern, '<span class="highlighted-text">$1</span>');
+  }
+</script>
+<section class="cmp-search-page">
+  <div class="cmp-search-page__page-banner">
+    <h1 class="cmp-search-page__page-title">Search Results</h1>
+  </div>
+  {% assign page_limit = 5 %}
+  {% paginate search.results by page_limit %}
+    {% if search.performed %}
+    {% if search.results_count > 0 %}
+      <div class="cmp-search-page__results-heading-row">
+        <div class="cmp-search-page__results-heading-column">
+          <span class="cmp-search-page__results-total-text">Results: {{ search.results_count }}<span>
+        </div>
+        <!-- TODO: Add select box which determines how many results are shown per page. Add total search results text
+        <div class="cmp-search-page__results-heading-column">
+          <select class="cmp-search-page__max-results-dropdown" name="results-per-page">
+            <option value="/search?q={{ search.terms }}&view=5" {% if limit == 5 %}selected="selected"{% endif %}>5</option>
+            <option value="/search?q={{ search.terms }}&view=10" {% if limit == 10 %}selected="selected"{% endif %}>10</option>
+            <option value="/search?q={{ search.terms }}&view=25" {% if limit == 25 %}selected="selected"{% endif %}>25</option>
+            <option value="/search?q={{ search.terms }}&view=50" {% if limit == 50 %}selected="selected"{% endif %}>50</option>
+          </select>
+        </div>
+        -->
+      </div>
+    {% endif %}
+      <div class="cmp-search-page__results-container">
+        {% for item in search.results %}
+          <button class="cmp-search-page__result cmp-search-page__result--tray-hidden">
+            <div class="cmp-search-page__result-content">
+              <div class="cmp-search-page__result-row">
+                <div class="cmp-search-page__result-column">
+                  {% if item.featured_image %}
+                    <a class="cmp-search-page__result-img" href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                      {{ item.featured_image.src | img_url: 'medium' | img_tag: item.featured_image.alt }}
+                    </a>
+                  {% endif %}
+                </div>
+                <div class="cmp-search-page__result-column">
+                  <a class="cmp-search-page__result-title-link" href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                    <h5 class="cmp-search-page__result-title">
+                      <script>
+                        document.write(highlightKeywords("{{ item.title | escape }}", "{{ search.terms | escape }}"));
+                      </script>
+                    </h5>
+                  </a>
+                </div>
+                <div class="cmp-search-page__result-column">
+                  <span class="cmp-search-page__result-chev"></span>
+                </div>
+              </div>
+              <div class="cmp-search-page__result-row cmp-search-page__result-row--tray">
+                <div class="cmp-search-page__result-column">
+                  <p class="cmp-search-page__result-desc">
+                    <script>
+                      document.write(highlightKeywords("{{ item.content | strip_html | truncatewords: 50 }}", "{{ search.terms | escape }}"));
+                    </script>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
 
-  {% if paginate.pages > 1 %}{{ paginate | default_pagination }}{% endif %}
-{% endpaginate %}
+    {% if search.results_count == 0 %}
+      <p>No results for "{{ search.terms }}" :(</p>
+    {% endif %}
+
+    {% if search.results_count > page_limit %}
+      <hr class="cmp-search-page__pagintaion-hr">
+      <div class="cmp-search-page__pagintaion">
+        {% if paginate.pages > 1 %}
+          {{ paginate | default_pagination }}
+        {% endif %}
+      </div>
+    {% endif %}
+  {% endpaginate %}
+</section>

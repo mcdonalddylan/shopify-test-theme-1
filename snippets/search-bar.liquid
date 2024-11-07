@@ -1,0 +1,9 @@
+<section class="cmp-search-bar">
+    <form action="{{ routes.search_url }}" method="get" role="search">
+        <div class="cmp-search-bar__container">
+            <input class="cmp-search-bar__input" id="{{ input_id }}" type="search" placeholder="{{ 'general.search.placeholder' | t }}" name="q" value="{{ search.terms | escape }}">
+            <button class="cmp-search-bar__search-btn" type="submit"></button>
+            <button class="cmp-search-bar__reset-btn cmp-search-bar__reset-btn--hidden"></button>
+        </div>
+    </form>
+</section>

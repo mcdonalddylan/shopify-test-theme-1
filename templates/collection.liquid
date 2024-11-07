@@ -6,7 +6,7 @@
     <div class="cmp-catalog__collections-container">
       {% for product in collection.products %}
         <a class="cmp-catalog__item" href="{{ product.url | within: collection }}">
-          <p class="cmp-catalog__item-title" >{% assign truncated_title = product.title | slice: 0, 15 %} {% if product.title.size > 15 %} {{ truncated_title | append: '...' | escape }} {% else %} {{ product.title | escape }} {% endif %}</p>
+          <p class="cmp-catalog__item-title" >{% assign truncated_title = product.title | slice: 0, 12 %} {% if product.title.size > 12 %} {{ truncated_title | append: '...' | escape }} {% else %} {{ product.title | escape }} {% endif %}</p>
           <p class="cmp-catalog__item-price" >{{ product.price | money }}</p>
           {% unless product.available %}<br><strong>sold out</strong>{% endunless %}
           <img class="cmp-catalog__item-img" src="{{ product.featured_image.src | img_url: 'large' }}" alt="{{ product.featured_image.alt | escape }}">

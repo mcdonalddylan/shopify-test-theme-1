@@ -1,8 +1,9 @@
 .cmp-cart__page-banner {
     max-width: var(--desktop-tablet-max-width);
     margin: 0 auto 15px;
-    padding: 10px 20px;
+    padding: 10px 30px;
     background: linear-gradient(170deg, var(--accent-color-200), var(--accent-color-300));
+    border-radius: 0 0 20px 20px;
 }
 
 .cmp-cart__page-title {
@@ -127,6 +128,12 @@
 .cmp-cart__cart-product-remove-btn {
     background-color: var(--red-200);
     text-decoration: none;
+    transition: 0.2s all ease;
+}
+
+.cmp-cart__cart-product-remove-btn:hover,
+.cmp-cart__cart-product-remove-btn:focus {
+    background-color: var(--red-100);
 }
 
 .cmp-cart__cart-product-remove-btn,
@@ -164,8 +171,25 @@
     background-color: var(--accent-color-200);
 }
 
+.cmp-cart__cart-update-btn:hover,
+.cmp-cart__cart-update-btn:focus {
+    color: var(--accent-color-200);
+    background-color: var(--accent-color-100);
+}
+
+.cmp-cart__cart-update-btn,
+.cmp-cart__cart-checkout-btn {
+    transition: 0.2s all ease;
+}
+
 .cmp-cart__cart-checkout-btn {
     background-color: var(--green-200);
+}
+
+.cmp-cart__cart-checkout-btn:hover,
+.cmp-cart__cart-checkout-btn:focus {
+    color: var(--green-200);
+    background-color: var(--green-100);
 }
 
 /* Tablet Styling */

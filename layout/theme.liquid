@@ -7,12 +7,17 @@
   <meta name="description" content="{{ page_description | escape }}">
   <link rel="canonical" href="{{ canonical_url }}">
   <meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no">
-  {{ content_for_header }} <!-- Header hook for plugins -->
+  <!-- Header hook for plugins -->
+  {{ content_for_header }}
+  <!-- CSS -->
   {{ 'application.css' | asset_url | stylesheet_tag }}
   {{ 'cart.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.css' | asset_url | stylesheet_tag }}
   {{ 'contact.css' | asset_url | stylesheet_tag }}
+  {{ 'error.css' | asset_url | stylesheet_tag }}
   {{ 'products.css' | asset_url | stylesheet_tag }}
+  {{ 'search.css' | asset_url | stylesheet_tag }}
+  <!-- JS -->
   {{ 'application.js' | asset_url | script_tag }}
 </head>
 <body>
@@ -22,24 +27,23 @@
     <div class="cmp-nav__container cmp-nav__container--centered cmp-nav__container--max-width">
       <div class="cmp-nav__site-nav-container">
         <div class="cmp-nav__site-nav">
-          {% for link in linklists.main-menu.links %}
-          {% assign child_list_handle = link.title | handleize %}
-          {% if linklists[child_list_handle].links != blank %}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-            [{% for childlink in linklists[child_list_handle].links %}
-              <a href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
-            {% endfor %}]
-          {% else %}
-            <a href="{{ link.url }}">{{ link.title }}</a>
-          {% endif %}
-          {% endfor %}
+          <a class="cmp-nav__home-link" href="/">
+            <span class="cmp-nav__home-link-text">{{ 'general.nav.home' | t }}</span>
+            <span class="cmp-nav__home-mobile-icon"></span>
+          </a>
+          <a href="/collections/all">{{ 'general.nav.catalog' | t }}</a>
+          <a href="/pages/contact">{{ 'general.nav.contact' | t }}</a>
         </div>
+      </div>
+
+      <div class="cmp-nav__search-nav-container">
+        {% render 'search-bar', input_id: 'search-bar-in-nav' %}
       </div>
 
       <div class="cmp-nav__account-nav-container">
         <div class="cmp-nav__account-nav">
           <a class="cmp-nav__cart-link" href="/cart">
-            <span class="cmp-nav__cart-link-text">Cart</span>
+            <span class="cmp-nav__cart-link-text">{{ 'general.nav.cart' | t }}</span>
             <span class="cmp-nav__cart-mobile-icon"></span>
             {% if cart.item_count > 0 %}
             <div class="cmp-nav__cart-items-text">{{ cart.item_count }}</div>
@@ -47,24 +51,23 @@
           </a>
 
           {% if shop.customer_accounts_enabled %}
-            <button class="cmp-nav__account-btn">Account</button>
+            <button class="cmp-nav__account-btn">{{ 'general.nav.account' | t }}</button>
             <section class="cmp-account-dropdown cmp-account-dropdown--hide">
               <ul class="cmp-account-dropdown__container">
                 {% if customer %}
                   <li>
-                    {{ 'Log Out'  | customer_logout_link }}
+                    {{ 'general.nav.account' | t | customer_logout_link }}
                   </li>
                 {% else %}
                   <li>
-                    {{ 'Log In ' | customer_login_link }}
+                    {{ 'general.nav.login' | t | customer_login_link }}
                   </li>
                   <li>
-                    {{ 'Register' | customer_register_link }}
+                    {{ 'general.nav.register' | t | customer_register_link }}
                   </li>
                 {% endif %}
               </ul>
             </section>
-              
           {% endif %}
         </div>
       </div>
@@ -74,9 +77,18 @@
 
   {% if template == 'index' %}
     <section class="cmp-site-banner cmp-site-banner--centered cmp-site-banner--max-width">
-      <div class="cmp-site-banner__title-container">
-        <div class="cmp-site-banner__title-column">
+      <div class="cmp-site-banner__bg-img-container">
+        <img class="cmp-site-banner__bg-img" src="{{ all_products['silk-summer-top'].images[0] | img_url: 'large' }}" alt="{{ all_products['silk-summer-top'].images[0].alt | escape }}">
+      </div>
+      <div class="cmp-site-banner__gradient-overlay"></div>
+      <div class="cmp-site-banner__row">
+        <div class="cmp-site-banner__column">
           <h1 class="cmp-site-banner__title-text">{{ shop.name }}</h1>
+        </div>
+      </div>
+      <div class="cmp-site-banner__row">
+        <div class="cmp-site-banner__column">
+          <h2 class="cmp-site-banner__subtext">{{ 'general.banner.subtext' | t }}</h2>
         </div>
       </div>
     </section>
@@ -89,15 +101,21 @@
 <footer>
   <section class="cmp-footer__container cmp-footer__container--centered cmp-footer__container--max-width">
     <div class="cmp-footer__links-row">
-      <div class="cmp-footer__links-column">
-        <a class="cmp-footer__link" href='/'>Home</a>
-      </div>
-      <div class="cmp-footer__links-column">
-        <a class="cmp-footer__link" href='/collections/all'>Catalog</a>
-      </div>
-      <div class="cmp-footer__links-column">
-        <a class="cmp-footer__link" href='/pages/contact'>Contact Us</a>
-      </div>
+      {% for link in linklists.main-menu.links %}
+        {% assign child_list_handle = link.title | handleize %}
+        {% if linklists[child_list_handle].links != blank %}
+          <div class="cmp-footer__links-column">
+            <a class="cmp-footer__link" href="{{ link.url }}">{{ link.title }}</a>
+            [{% for childlink in linklists[child_list_handle].links %}
+              <a class="cmp-footer__link" href="{{ childlink.url }}">{{ childlink.title | escape }}</a>
+            {% endfor %}]
+          </div>
+        {% else %}
+          <div class="cmp-footer__links-column">
+            <a class="cmp-footer__link" href="{{ link.url }}">{{ link.title }}</a>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
   </section>
 </footer>
